@@ -136,3 +136,10 @@ Restart KeePassXC (or any SSH agent integration) to re-establish the connection.
 - The `sshd` service was automatically updated to point to the new path by the winget installer.
 - The new version adds support for `mlkem768x25519-sha256` and other modern key exchange algorithms.
 - Future updates: `winget upgrade Microsoft.OpenSSH.Preview`
+- If your SSH private key is managed by an agent (e.g. KeePassXC) rather than stored as a file on disk, make sure `~/.ssh/config` for `github.com` does **not** contain `IdentityFile` or `IdentitiesOnly` — these force the SSH client to look for a key file and ignore the agent entirely. A minimal config works best:
+
+  ```
+  Host github.com
+      HostName github.com
+      User git
+  ```
