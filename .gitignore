@@ -1,0 +1,30 @@
+# ============================================================================
+# WHITELIST-FIRST .gitignore
+# ============================================================================
+# Ignore everything by default, then un-ignore exactly what is versioned.
+# Nothing can end up tracked, staged or pushed that was not explicitly
+# re-included here.
+#
+# This repository is documentation-only: no source tree, no CI, no generated
+# artifacts. Adding a new tree therefore needs a `!/dir/` + `!/dir/**` pair.
+#
+# --- 1. Ignore everything by default ---------------------------------------
+*
+
+# --- 2. Whitelist: hand-authored root files -------------------------------
+# `.gitignore` must be un-ignored explicitly, otherwise the leading `*`
+# stops the rule set from being versioned.
+!.gitignore
+!LICENSE
+!README.md
+
+# --- 3. Never tracked, by design -------------------------------------------
+# No un-ignore rule exists for any of these, so the leading `*` keeps them
+# out permanently - there is nothing to forget later:
+#   .env  .venv/  .idea/  .vscode/  .DS_Store  Thumbs.db
+#   keys/  *.pem  *.key       key material
+#   *.exe  *.zip  downloads
+#
+# Verify this file before trusting it:
+#   git add -A --dry-run                 lists exactly what would be staged
+#   git ls-files -ci --exclude-standard   must be empty
